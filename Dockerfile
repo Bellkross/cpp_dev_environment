@@ -2,7 +2,8 @@
 FROM python:3.11
 
 # Install Git
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git && \
+        apt-get install -y build-essential gdb cmake
 
 # Set the working directory to /workspace
 WORKDIR /workspace
