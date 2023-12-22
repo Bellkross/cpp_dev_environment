@@ -1,6 +1,10 @@
 #include <iostream>
+#include <string>
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    int watermelon_weight;
+    std::cin >> watermelon_weight;
+    std::string result = watermelon_weight % 2 == 0 ? "YES" : "NO";
+    std::cout << result << std::endl;
     return 0;
 }
