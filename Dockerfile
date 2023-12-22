@@ -1,5 +1,5 @@
-# Use the official Python image with version 3.11
-FROM python:3.11
+# Use a minimal base image with a C++ compiler
+FROM gcc:latest
 
 # Install Git
 RUN apt-get update && apt-get install -y git && \
