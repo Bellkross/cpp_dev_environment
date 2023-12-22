@@ -4,6 +4,7 @@
 int boredom(int* arr, int length)
 {
     // https://codeforces.com/problemset/problem/455/A
+    // TODO: calculate score for each point
     return 10;
 }
 
