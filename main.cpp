@@ -3,6 +3,7 @@
 
 int boredom(int* arr, int length)
 {
+    // https://codeforces.com/problemset/problem/455/A
     return 10;
 }
 
