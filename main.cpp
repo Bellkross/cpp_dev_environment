@@ -1,15 +1,34 @@
 #include <iostream>
 #include <string>
 
-int main() {
-    int watermelon_weight;
-    std::cin >> watermelon_weight;
-    std::string result;
-    if (watermelon_weight <= 2) {
-        result = "NO";
-    } else {
-        result = watermelon_weight % 2 == 0 ? "YES" : "NO";
+int main() 
+{
+    std::string line;
+    std::getline(std::cin, line);
+    char curr;
+    int count = 0;
+    for (const char& c : line) 
+    {
+        if (count == 0)
+        {
+            curr = c;
+            count = 1;
+            continue;
+        }
+        if (curr == c)
+        {
+            ++count;
+        } else 
+        {
+            curr = c;
+            count = 1;
+        }
+        if (count >= 7)
+        {
+            std::cout << "YES" << std::endl;
+            return 0;
+        }
     }
-    std::cout << result << std::endl;
+    std::cout << "NO" << std::endl;
     return 0;
 }
