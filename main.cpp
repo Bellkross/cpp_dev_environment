@@ -23,7 +23,7 @@ int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
         if (integers.count(removed - 1)) {
             removed_integers.push_back(removed - 1);
         }
-        if (points.count(removed + 1)) {
+        if (integers.count(removed + 1)) {
             removed_integers.push_back(removed + 1);
         }
         removed_integers.push_back(removed);
