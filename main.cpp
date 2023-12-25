@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -33,9 +34,6 @@ int boredom(vector<int>& integers, unordered_map<int, int>& points)
             res = curr;
         }
         integers.insert(integers.begin() + i, removed);
-        if (points.count(removed) > 0) {
-            ++points[removed];
-        }
         for (const auto& rp : removed_pairs) {
             points[rp.first] = rp.second;
         }
@@ -57,6 +55,7 @@ int main()
     for (const auto& pair : points) {
         integers.push_back(pair.first);
     }
+    sort(integers.begin(), integers.end());
     cout << boredom(integers, points) << std::endl;
     return 0;
 }
