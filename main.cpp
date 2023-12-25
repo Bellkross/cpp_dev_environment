@@ -1,41 +1,41 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
 // https://codeforces.com/problemset/problem/455/A
-int boredom(vector<int>& integers, unordered_map<int, int>& points)
+int boredom(unordered_set<int>& integers, unordered_map<int, int>& points)
 {
-    if (integers.size() == 1 && points[integers[0]] == 1) {
-        return integers[0];
+    vector<int> ints(integers.begin(), integers.end());
+    if (ints.size() == 1) {
+        return ints[0] * points[ints[0]];
     }
-    int integers_size = integers.size();
+    int integers_size = ints.size();
     int res = 0;
     for (int i = 0; i < integers_size; ++i) {
-        int removed = integers[i];
+        int removed = ints[i];
         int removed_points = removed * points[removed];
-        vector<pair<int, int>> removed_pairs;
-        if (points.count(removed - 1) > 0) {
-            removed_pairs.push_back(make_pair(removed - 1, points[removed - 1]));
+        vector<int> removed_integers;
+        if (integers.count(removed - 1)) {
+            removed_integers.push_back(removed - 1);
         }
-        if (points.count(removed + 1) > 0) {
-            removed_pairs.push_back(make_pair(removed + 1, points[removed + 1]));
+        if (points.count(removed + 1)) {
+            removed_integers.push_back(removed + 1);
         }
-        removed_pairs.push_back(make_pair(removed, points[removed]));
-        points.erase(removed - 1);
-        points.erase(removed);
-        points.erase(removed + 1);
-        integers.erase(integers.begin() + i);
+        removed_integers.push_back(removed);
+        integers.erase(removed - 1);
+        integers.erase(removed);
+        integers.erase(removed + 1);
         int curr = removed_points + boredom(integers, points);
         if (curr > res) {
             res = curr;
         }
-        integers.insert(integers.begin() + i, removed);
-        for (const auto& rp : removed_pairs) {
-            points[rp.first] = rp.second;
+        for (const int ri : removed_integers) {
+           integers.insert(ri); 
         }
     }
     return res;
@@ -51,11 +51,10 @@ int main()
         cin >> a[i];
         ++points[a[i]];
     }
-    vector<int> integers(points.size());
+    unordered_set<int> integers(points.size());
     for (const auto& pair : points) {
-        integers.push_back(pair.first);
+        integers.insert(pair.first);
     }
-    sort(integers.begin(), integers.end());
     cout << boredom(integers, points) << std::endl;
     return 0;
 }
