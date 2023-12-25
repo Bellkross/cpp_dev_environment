@@ -8,7 +8,7 @@
 using namespace std;
 
 // https://codeforces.com/problemset/problem/455/A
-int boredom(unordered_set<int>& integers, unordered_map<int, int>& points)
+int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
 {
     const vector<int> ints(integers.begin(), integers.end());
     if (ints.size() == 1) {
