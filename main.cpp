@@ -12,13 +12,13 @@ int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
 {
     const vector<int> ints(integers.begin(), integers.end());
     if (ints.size() == 1) {
-        return ints[0] * points[ints[0]];
+        return ints[0] * points.at(ints[0]);
     }
     int integers_size = ints.size();
     int res = 0;
     for (int i = 0; i < integers_size; ++i) {
         int removed = ints[i];
-        int removed_points = removed * points[removed];
+        int removed_points = removed * points.at(removed);
         vector<int> removed_integers;
         if (integers.count(removed - 1)) {
             removed_integers.push_back(removed - 1);
