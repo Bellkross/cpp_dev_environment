@@ -1,15 +1,29 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#include <unordered_set>
+#include <set>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
-// https://codeforces.com/problemset/problem/455/A
-int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
+string to_string(const set<int>& integers) 
 {
+    ostringstream oss;
+    for (const int& i : integers) {
+        oss << i << " ";
+    }
+    return oss.str();
+}
+
+// https://codeforces.com/problemset/problem/455/A
+int boredom(set<int>& integers, const unordered_map<int, int>& points, unordered_map<string, int>& mem)
+{
+    string str_ints = to_string(integers);
+    if (mem.count(str_ints)) {
+        return mem[str_ints];
+    }
     const vector<int> ints(integers.begin(), integers.end());
     if (ints.size() == 1) {
         return ints[0] * points.at(ints[0]);
@@ -30,7 +44,7 @@ int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
         integers.erase(removed - 1);
         integers.erase(removed);
         integers.erase(removed + 1);
-        int curr = removed_points + boredom(integers, points);
+        int curr = removed_points + boredom(integers, points, mem);
         if (curr > res) {
             res = curr;
         }
@@ -38,6 +52,7 @@ int boredom(unordered_set<int>& integers, const unordered_map<int, int>& points)
            integers.insert(ri); 
         }
     }
+    mem[str_ints] = res;
     return res;
 }
 
@@ -47,12 +62,13 @@ int main()
     cin >> n;
     int* a = new int[n];
     unordered_map<int, int> points;
-    unordered_set<int> integers;
+    set<int> integers;
+    unordered_map<string, int> mem;
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         integers.insert(a[i]);
         ++points[a[i]];
     }
-    cout << boredom(integers, points) << std::endl;
+    cout << boredom(integers, points, mem) << std::endl;
     return 0;
 }
