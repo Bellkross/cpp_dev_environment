@@ -56,7 +56,7 @@ int boredom(set<int>& integers, const unordered_map<int, int>& points, unordered
     return res;
 }
 
-long b(const vector<long>& ints, const unordered_map<long, long>& points, int i, unordered_map<int, long>& mem) {
+long long b(const vector<long long>& ints, const unordered_map<long long, long long>& points, int i, unordered_map<int, long long>& mem) {
     if (i >= ints.size()) 
     {
         return 0;
@@ -65,11 +65,11 @@ long b(const vector<long>& ints, const unordered_map<long, long>& points, int i,
     {
         return mem[i];
     }
-    long curr = ints[i];
-    long curr_points = curr * points.at(curr);
+    long long curr = ints[i];
+    long long curr_points = curr * points.at(curr);
     int use_i = (i + 1 < ints.size() && ints[i + 1] == curr + 1) ? i + 2 : i + 1;
-    long use = static_cast<long>(static_cast<long>(curr_points) + static_cast<long>(b(ints, points, use_i, mem)));
-    long no_use = b(ints, points, i + 1, mem);
+    long long use = static_cast<long long>(static_cast<long long>(curr_points) + static_cast<long long>(b(ints, points, use_i, mem)));
+    long long no_use = b(ints, points, i + 1, mem);
     mem[i] = max(use, no_use);
     return mem[i];
 }
@@ -78,16 +78,16 @@ int main()
 {
     int n;
     cin >> n;
-    long* a = new long[n];
-    unordered_map<int, long> mem;
-    unordered_map<long, long> points;
-    set<long> integers;
+    long long* a = new long long[n];
+    unordered_map<int, long long> mem;
+    unordered_map<long long, long long> points;
+    set<long long> integers;
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         integers.insert(a[i]);
         ++points[a[i]];
     }
-    vector<long> ints(integers.begin(), integers.end());
+    vector<long long> ints(integers.begin(), integers.end());
     cout << b(ints, points, 0, mem) << std::endl;
     return 0;
 }
