@@ -78,7 +78,7 @@ int main()
 {
     int n;
     cin >> n;
-    int* a = new int[n];
+    long* a = new long[n];
     unordered_map<int, long> mem;
     unordered_map<long, long> points;
     set<long> integers;
