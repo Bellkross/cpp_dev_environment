@@ -56,7 +56,7 @@ int boredom(set<int>& integers, const unordered_map<int, int>& points, unordered
     return res;
 }
 
-long b(const vector<long>& ints, const unordered_map<int, int>& points, int i, unordered_map<int, long>& mem) {
+long b(const vector<long>& ints, const unordered_map<long, long>& points, int i, unordered_map<int, long>& mem) {
     if (i >= ints.size()) 
     {
         return 0;
