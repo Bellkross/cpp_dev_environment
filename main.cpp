@@ -68,7 +68,7 @@ long long b(const vector<long long>& ints, const unordered_map<long long, long l
     long long curr = ints[i];
     long long curr_points = curr * points.at(curr);
     int use_i = (i + 1 < ints.size() && ints[i + 1] == curr + 1) ? i + 2 : i + 1;
-    long long use = static_cast<long long>(static_cast<long long>(curr_points) + static_cast<long long>(b(ints, points, use_i, mem)));
+    long long use = curr_points + b(ints, points, use_i, mem);
     long long no_use = b(ints, points, i + 1, mem);
     mem[i] = max(use, no_use);
     return mem[i];
