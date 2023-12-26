@@ -56,6 +56,19 @@ int boredom(set<int>& integers, const unordered_map<int, int>& points, unordered
     return res;
 }
 
+int b(const vector<int>& ints, const unordered_map<int, int>& points, int i) {
+    if (i >= ints.size()) 
+    {
+        return 0;
+    }
+    int curr = ints[i];
+    int curr_points = curr * points.at(curr);
+    int use_i = (i + 1 < ints.size() && ints[i + 1] == curr + 1) ? i + 2 : i + 1;
+    int use = curr_points + b(ints, points, use_i);
+    int no_use = b(ints, points, i + 1);
+    return max(use, no_use);
+}
+
 int main() 
 {
     int n;
@@ -63,12 +76,12 @@ int main()
     int* a = new int[n];
     unordered_map<int, int> points;
     set<int> integers;
-    unordered_map<string, int> mem;
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         integers.insert(a[i]);
         ++points[a[i]];
     }
-    cout << boredom(integers, points, mem) << std::endl;
+    vector<int> ints(integers.begin(), integers.end());
+    cout << b(ints, points, 0) << std::endl;
     return 0;
 }
