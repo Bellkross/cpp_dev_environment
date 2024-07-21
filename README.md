@@ -11,3 +11,8 @@ docker run -it --name devenv_container devenv
 docker rm devenv_container
 docker rmi devenv
 ```
+
+Rebuild:
+```
+docker rm devenv_container && docker rmi devenv && docker build -t devenv . && docker run -it --name devenv_container devenv
+```
