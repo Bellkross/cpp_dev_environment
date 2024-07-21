@@ -1,4 +1,4 @@
-# Makefile for running the C++ program
+# Makefile for running programs
 
-run:
+run_cpp:
 	g++ -o main main.cpp && ./main && rm -rf ./main 
