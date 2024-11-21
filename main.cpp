@@ -9,10 +9,12 @@
 
 using namespace std;
 
-// n and m - dimensions of the grid
-// then values of the grid. n lines m values each
-// stream was intercepted, shuffled all given integers and put them in k long line
-// Output any possible value n m that couldve been provided
+class Solution {
+public:
+    int shortestSubarray(vector<int>& nums, int k) {
+
+    }
+};
 
 int main()
 {
